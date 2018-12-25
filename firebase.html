@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+
+<body>
+<h1> Hello <span id="clientName"></span></h1>
+<h1> Your Email <span id="clientEmail"></span></h1>
+<h1> Your UId <span id="clientUid"></span></h1>
+
+<img id="clientPhoto" src="">
+</body>
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB0BZ_ZGdlzeVupnfxnvblOZgr1Bh1ZiXM",
+    authDomain: "my-firebase-project-898ee.firebaseapp.com",
+    databaseURL: "https://my-firebase-project-898ee.firebaseio.com",
+    projectId: "my-firebase-project-898ee",
+    storageBucket: "my-firebase-project-898ee.appspot.com",
+    messagingSenderId: "338444195543"
+  };
+  firebase.initializeApp(config);
+  
+  functionlogin(){
+   function newloginHappened(user){
+   if(user){
+   app(user);
+   }
+   else {
+    var provider=new firebase.auth.GoogleAuthProvider();
+	firebase.auth().signInWithRedirect(provider);
+	
+   }
+   }
+   firebase.auth().onAuthStateChanged(newloginHappened);
+  }
+  
+  function app(user){
+  document.getElementById("clientName").innerHTML=user.displayName;
+    document.getElementById("clientEmail").innerHTML=user.email;
+  document.getElementById("clientUid").innerHTML=user.uid; 
+ document.getElementById("clientPhoto").setAttribute("src",user.photoURL);
+ 
+ }
+  window.onload=app;
+</script>
+
+
+</html>
